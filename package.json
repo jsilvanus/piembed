@@ -1,6 +1,7 @@
 {
   "name": "piembed",
   "version": "0.1.0",
+  "packageManager": "pnpm@11.23.0",
   "description": "Vector embedding and semantic cue matching microservice for the Raspberry Pi production ecosystem",
   "private": true,
   "type": "module",
@@ -24,5 +25,14 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "pi": {
+    "service": "piembed",
+    "displayName": "PiEmbed",
+    "layer": "Layer 3: Orchestration",
+    "port": 3300,
+    "ports": {},
+    "healthEndpoint": "/health",
+    "envPortVar": "PIEMBED_PORT"
+  }
 }
