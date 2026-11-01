@@ -22,7 +22,7 @@ By default, `piembed` queries an adjacent **Ollama** server (`POST /api/embed`) 
   1. **Preflight**: Batch-embeds and caches rundown cue target phrases when a rundown is loaded (`POST /api/v1/cues/preflight`).
   2. **Live Match**: Evaluates rolling ASR caption windows against active cue IDs in a single forward pass (`POST /api/v1/cues/match`).
 
-## API Endpoints (Port `3125`)
+## API Endpoints (Port `3300`)
 
 ### Semantic Cue Workflow
 - `POST /api/v1/cues/preflight` — Register and pre-compute vectors for rundown semantic cues (`{ rundownId, cues: [{ id, phrase }] }`).

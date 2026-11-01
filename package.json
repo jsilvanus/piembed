@@ -30,7 +30,7 @@
     "service": "piembed",
     "displayName": "PiEmbed",
     "layer": "Layer 3: Semantic Vector Engine",
-    "port": 3125,
+    "port": 3300,
     "ports": {},
     "healthEndpoint": "/health",
     "envPortVar": "PIEMBED_PORT"
