@@ -29,7 +29,7 @@
   "pi": {
     "service": "piembed",
     "displayName": "PiEmbed",
-    "layer": "Layer 3: Semantic Vector Engine",
+    "layer": "Layer 3: Orchestration",
     "port": 3300,
     "ports": {},
     "healthEndpoint": "/health",
