@@ -1,3 +1,4 @@
+import { normalizeKeepAlive } from "../config.js";
 import { l2Normalize } from "../vector/math.js";
 import type { EmbeddingProvider, ProviderEmbedOutput } from "./types.js";
 
@@ -5,6 +6,7 @@ export interface OllamaProviderOptions {
   baseUrl: string;
   defaultModel: string;
   timeoutMs?: number;
+  keepAlive?: string | number;
   fetchFn?: typeof fetch;
 }
 
@@ -13,6 +15,7 @@ export class OllamaEmbeddingProvider implements EmbeddingProvider {
   private baseUrl: string;
   private currentModel: string;
   private timeoutMs: number;
+  private keepAlive: string | number;
   private lastDimensions: number | null = null;
   private fetchFn: typeof fetch;
 
@@ -20,6 +23,7 @@ export class OllamaEmbeddingProvider implements EmbeddingProvider {
     this.baseUrl = options.baseUrl.replace(/\/+$/, "");
     this.currentModel = options.defaultModel;
     this.timeoutMs = options.timeoutMs ?? 2500;
+    this.keepAlive = normalizeKeepAlive(options.keepAlive);
     this.fetchFn = options.fetchFn ?? globalThis.fetch;
   }
 
@@ -77,7 +81,7 @@ export class OllamaEmbeddingProvider implements EmbeddingProvider {
     const res = await this.fetchFn(`${this.baseUrl}/api/embed`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model, input: texts }),
+      body: JSON.stringify({ model, input: texts, keep_alive: this.keepAlive }),
       signal: AbortSignal.timeout(this.timeoutMs),
     });
 
@@ -111,7 +115,7 @@ export class OllamaEmbeddingProvider implements EmbeddingProvider {
       const res = await this.fetchFn(`${this.baseUrl}/api/embeddings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model, prompt }),
+        body: JSON.stringify({ model, prompt, keep_alive: this.keepAlive }),
         signal: AbortSignal.timeout(this.timeoutMs),
       });
       if (!res.ok) {
