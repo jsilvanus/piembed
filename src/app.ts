@@ -37,6 +37,7 @@ export function createApp(options: AppOptions = {}): {
         baseUrl: config.ollamaUrl,
         defaultModel: config.ollamaModel,
         timeoutMs: config.ollamaTimeoutMs,
+        keepAlive: config.ollamaKeepAlive,
       }),
       fallback: new InProcessTransformersProvider({
         defaultModel: config.inprocessModel,
